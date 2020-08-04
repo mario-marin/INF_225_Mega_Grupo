@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import {MainEquipamiento} from './Contexto_Equipamiento/Main_view_equipamiento';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainEquipamiento />
   </React.StrictMode>,
   document.getElementById('root')
 );
