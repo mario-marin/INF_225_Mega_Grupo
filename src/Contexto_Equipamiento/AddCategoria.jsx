@@ -27,8 +27,7 @@ export class AddCategoria extends Component {
 		xhr.addEventListener('load', () => {
       		console.log(xhr.responseText)
     	})
-    	//xhr.open('POST', '/categorias')
-    	xhr.open('POST', '/categorias')
+    	xhr.open('POST', '/categorias');
 
     	xhr.setRequestHeader('Content-Type', 'application/json');
    

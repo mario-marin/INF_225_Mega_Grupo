@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {AddCategoria} from './AddCategoria';
+import {ViewCategorias} from './ViewCategorias';
 
 
 export class MainEquipamiento extends Component {
@@ -7,14 +8,16 @@ export class MainEquipamiento extends Component {
 	constructor(props){
 		super(props);
 	    this.state = {
-	    	selector: 0
+	    	selector: 0,
+	    	exito_guardar: false
 	    };
 	    this.changeCategoria = React.createRef()
 	}
 
 	volver(){
 		this.setState({
-			selector: 0
+			selector: 0,
+			exito_guardar: false
 		});
 	}
 
@@ -24,13 +27,18 @@ export class MainEquipamiento extends Component {
 		});
 	}
 
+	guardar_categoria(){
+
+		this.changeCategoria.current.save();
+
+		this.setState({
+			exito_guardar: true
+		});
+	}
+
 
 	render() {
 		
-		const display = {
-
-		}
-
 		return (
 			<div>
 				{
@@ -40,6 +48,9 @@ export class MainEquipamiento extends Component {
 							<h1>Categorias</h1>
 							<div>
 								<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
+							</div>
+							<div>
+								<button type="button" onClick={ () => {this.go(2)}} >Ver categorias</button>
 							</div>
 						</div>
 					) : null
@@ -55,13 +66,31 @@ export class MainEquipamiento extends Component {
 							</div>
 							<div>
 
-								<button type="button" onClick={ () => {this.changeCategoria.current.save()}} >Guardar</button> 
+								<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
 								<button type="button" onClick={ () => {this.volver()}} >Volver</button> 
 							</div>
+
+							{
+								this.state.exito_guardar ? 
+								(
+									<div>
+										<h2>Accion realizada con exito</h2>
+									</div>
+								) : null
+							}
+
+
 						</div>
 					) : null
 				}
-				
+				{
+					this.state.selector == 2 ? 
+					(
+						<div>
+							<ViewCategorias/>
+						</div>
+					) : null
+				}
 			</div>
 		);
 	}
