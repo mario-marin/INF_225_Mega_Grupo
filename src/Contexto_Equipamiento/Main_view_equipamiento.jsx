@@ -47,11 +47,12 @@ export class MainEquipamiento extends Component {
 						<div>
 							<h1>Categorias</h1>
 							<div>
-								<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
+								<ViewCategorias/>
 							</div>
 							<div>
-								<button type="button" onClick={ () => {this.go(2)}} >Ver categorias</button>
+								<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
 							</div>
+
 						</div>
 					) : null
 				}
@@ -83,14 +84,7 @@ export class MainEquipamiento extends Component {
 						</div>
 					) : null
 				}
-				{
-					this.state.selector == 2 ? 
-					(
-						<div>
-							<ViewCategorias/>
-						</div>
-					) : null
-				}
+				
 			</div>
 		);
 	}
