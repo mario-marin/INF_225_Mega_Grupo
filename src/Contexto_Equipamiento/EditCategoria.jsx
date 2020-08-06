@@ -39,7 +39,9 @@ export class EditCategoria extends Component {
     	}))
 	}
 
-
+	componentDidMount() {
+		this.props.hide_button();
+	}
 
 	render() {
 		

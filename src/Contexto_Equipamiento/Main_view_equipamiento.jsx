@@ -9,7 +9,8 @@ export class MainEquipamiento extends Component {
 		super(props);
 	    this.state = {
 	    	selector: 0,
-	    	exito_guardar: false
+	    	exito_guardar: false,
+	    	hide_create: false
 	    };
 	    this.changeCategoria = React.createRef()
 	}
@@ -36,7 +37,20 @@ export class MainEquipamiento extends Component {
 		});
 	}
 
+	hide_create_cat(){
+		this.setState({
+			hide_create: true
+		});
+	}
 
+	unhide_create_cat(){
+		this.setState({
+			hide_create: false
+		});
+	}
+
+
+//importante, dato de como realizar la comunicacion desde hijos a padres: https://www.pluralsight.com/guides/how-to-handle-communication-between-parent-and-child-components-in-reactjs
 	render() {
 		
 		return (
@@ -47,11 +61,19 @@ export class MainEquipamiento extends Component {
 						<div>
 							<h1>Categorias</h1>
 							<div>
-								<ViewCategorias/>
+								<ViewCategorias
+								hide_button = {this.hide_create_cat.bind(this)}
+								unhide_button = {this.unhide_create_cat.bind(this)}
+								/>
 							</div>
-							<div>
-								<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
-							</div>
+							{
+								this.state.hide_create ? (null) : (
+									<div>
+										<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
+									</div>
+									)
+							}
+							
 						</div>
 					) : null
 				}

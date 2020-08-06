@@ -71,6 +71,8 @@ export class ViewCategorias extends Component {
 
 	volver(){
 
+		this.props.unhide_button();
+
 		this.get_categorias();
 		this.setState({
 			selector: 0,
@@ -143,6 +145,7 @@ export class ViewCategorias extends Component {
 							id = {this.state.edit_categoria_id} 
 							name = {this.state.edit_categoria_name}
 							description = {this.state.edit_categoria_description}
+							hide_button = {this.props.hide_button.bind(this)}
 							ref = {this.changeEdit}
 						/>
 						<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
