@@ -52,7 +52,7 @@ export class EditCategoria extends Component {
 
 		return (
 			<div>
-				<h1>Agregar una Nueva Categoria</h1>
+				<h1>Editar una Categoria</h1>
 
 				<form>
 					<label style={label}>
@@ -62,8 +62,8 @@ export class EditCategoria extends Component {
 					<label style={label}>
 						Descripcion
 					</label>
-					<input type="text" value={this.state.description} onChange={event => this.changeDescription(event.target.value)} >
-					</input>
+					<textarea type="text" value={this.state.description} onChange={event => this.changeDescription(event.target.value)} >
+					</textarea>
 					
 
 				</form>

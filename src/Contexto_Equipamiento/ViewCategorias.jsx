@@ -128,7 +128,7 @@ export class ViewCategorias extends Component {
 									<td>{categoria.nombre}</td>
 									<td>{categoria.descripcion}</td>
 									<td>
-										<button type="button" onClick={ () => {this.go(1,categoria.id,categoria.nombre,categoria.descripcion)}} >Editar</button>  
+										<button type="button" onClick={ () => {this.go(1, categoria.id, categoria.nombre, categoria.descripcion)}} >Editar</button>  
 										<button type="button" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</button>  
 									</td>
 								</tr>

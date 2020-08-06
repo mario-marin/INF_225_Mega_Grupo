@@ -59,7 +59,12 @@ export class MainEquipamiento extends Component {
 					this.state.selector == 0 ? 
 					(
 						<div>
-							<h1>Categorias</h1>
+							{
+								this.state.hide_create ? (null) : (
+									<h1>Categorias</h1>
+								)
+							}
+							
 							<div>
 								<ViewCategorias
 								hide_button = {this.hide_create_cat.bind(this)}
