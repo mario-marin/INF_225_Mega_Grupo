@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
+import {EditCategoria} from './EditCategoria';
 
 
 export class ViewCategorias extends Component {
@@ -7,8 +8,14 @@ export class ViewCategorias extends Component {
 	constructor(props){
 		super(props);
 	    this.state = {
-	    	data: null
+	    	data: null,
+	    	selector: 0,
+			exito_guardar: false,
+			edit_categoria_id: null,
+			edit_categoria_name: null,
+			edit_categoria_description: null
 	    };
+	    this.changeEdit = React.createRef();
 	}
 
 	get_categorias(){
@@ -62,6 +69,34 @@ export class ViewCategorias extends Component {
 		this.get_categorias();
 	}
 
+	volver(){
+
+		this.get_categorias();
+		this.setState({
+			selector: 0,
+			exito_guardar: false
+		});
+
+	}
+
+	go(value,id,name, description){
+		this.setState({
+			selector: value,
+			edit_categoria_id: id,
+			edit_categoria_name: name,
+			edit_categoria_description: description
+		});
+	}
+
+	guardar_categoria(){
+
+		this.changeEdit.current.save();
+
+		this.setState({
+			exito_guardar: true
+		});
+	}
+
 	render() {
 		
 
@@ -74,26 +109,56 @@ export class ViewCategorias extends Component {
 			{
 				this.state.data == null ? (<div>Cargando...</div>) : (
 				<div>
-					<Table striped bordered hover>
-						<thead>
-					    	<tr>
-						      <th>Nombre</th>
-						      <th>Descripcion</th>
-						      <th>Accion</th>
-					    	</tr>
-					  	</thead>
-					  	<tbody>
-						{this.state.data.map ((categoria) => 
-							<tr>
-								<td>{categoria.nombre}</td>
-								<td>{categoria.descripcion}</td>
-								<td> <button type="button" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</button>  </td>
-							</tr>
-						)}
-						</tbody>
-					</Table>
-				</div>
-				)
+				{
+					this.state.selector == 0 ? (
+					<div>
+						<Table striped bordered hover>
+							<thead>
+						    	<tr>
+							      <th>Nombre</th>
+							      <th>Descripcion</th>
+							      <th>Accion</th>
+						    	</tr>
+						  	</thead>
+						  	<tbody>
+							{this.state.data.map ((categoria) => 
+								<tr>
+									<td>{categoria.nombre}</td>
+									<td>{categoria.descripcion}</td>
+									<td>
+										<button type="button" onClick={ () => {this.go(1,categoria.id,categoria.nombre,categoria.descripcion)}} >Editar</button>  
+										<button type="button" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</button>  
+									</td>
+								</tr>
+							)}
+							</tbody>
+						</Table>
+
+					</div>
+					) : null
+				}{
+					this.state.selector == 1 ? (
+					<div>
+						<EditCategoria
+							id = {this.state.edit_categoria_id} 
+							name = {this.state.edit_categoria_name}
+							description = {this.state.edit_categoria_description}
+							ref = {this.changeEdit}
+						/>
+						<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
+						<button type="button" onClick={ () => {this.volver()}} >Volver</button> 
+						{
+								this.state.exito_guardar ? 
+								(
+									<div>
+										<h2>Accion realizada con exito</h2>
+									</div>
+								) : null
+						}
+					</div>
+					) : null
+				}
+				</div>)
 			}
 				
 			</div>

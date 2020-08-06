@@ -52,7 +52,6 @@ export class MainEquipamiento extends Component {
 							<div>
 								<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
 							</div>
-
 						</div>
 					) : null
 				}
@@ -65,6 +64,7 @@ export class MainEquipamiento extends Component {
 									ref = {this.changeCategoria}
 								/>
 							</div>
+
 							<div>
 
 								<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
