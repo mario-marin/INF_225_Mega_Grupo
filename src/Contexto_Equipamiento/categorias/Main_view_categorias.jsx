@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {ViewEquipamiento} from './equipamiento/ViewEquipamiento';
-import {AddEquipamiento} from './equipamiento/AddEquipamiento';
-import {MainCategorias} from './categorias/Main_view_categorias';
+import {AddCategoria} from './AddCategoria';
+import {ViewCategorias} from './ViewCategorias';
 import Button from 'react-bootstrap/Button';
 
 
-export class MainEquipamiento extends Component {
+export class MainCategorias extends Component {
 
 	constructor(props){
 		super(props);
@@ -63,12 +62,12 @@ export class MainEquipamiento extends Component {
 						<div>
 							{
 								this.state.hide_create ? (null) : (
-									<h1>Equipamiento</h1>
+									<h1>Categorias</h1>
 								)
 							}
 							
 							<div>
-								<ViewEquipamiento
+								<ViewCategorias
 								hide_button = {this.hide_create_cat.bind(this)}
 								unhide_button = {this.unhide_create_cat.bind(this)}
 								/>
@@ -76,8 +75,7 @@ export class MainEquipamiento extends Component {
 							{
 								this.state.hide_create ? (null) : (
 									<div>
-										<Button variant="primary" onClick={ () => {this.go(1)}} >Agregar equipamiento</Button> {' '}
-										<Button variant="primary" onClick={ () => {this.go(2)}} >Administrar Categorias</Button>
+										<Button variant="primary" onClick={ () => {this.go(1)}} >Agregar categoria</Button>
 									</div>
 									)
 							}
@@ -90,7 +88,7 @@ export class MainEquipamiento extends Component {
 					(
 						<div>
 							<div>
-								<AddEquipamiento
+								<AddCategoria
 									ref = {this.changeCategoria}
 								/>
 							</div>
@@ -113,14 +111,6 @@ export class MainEquipamiento extends Component {
 
 						</div>
 					) : null
-				}
-
-				{
-					this.state.selector == 2 ? (
-						<div>
-							<MainCategorias/>
-						</div>
-						) : null
 				}
 				
 			</div>
