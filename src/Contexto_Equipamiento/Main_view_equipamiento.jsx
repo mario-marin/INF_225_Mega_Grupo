@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {AddCategoria} from './AddCategoria';
-import {ViewCategorias} from './ViewCategorias';
+import {AddCategoria} from './categorias/AddCategoria';
+import {ViewCategorias} from './categorias/ViewCategorias';
 import Button from 'react-bootstrap/Button';
 
 
