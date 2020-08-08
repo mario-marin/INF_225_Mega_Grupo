@@ -10,7 +10,7 @@ export class EditEquipamiento extends Component {
 	    	name: this.props.name,
 	    	description: this.props.description,
 	    	selected_categoria: this.props.categoria,
-	    	estado: null,
+	    	estado: 200,
 	    	categorias_data: [{
 	    		index:0,
 	    		nombre:"Cargando categorias",
@@ -51,14 +51,17 @@ export class EditEquipamiento extends Component {
     	xhr.open('PUT', '/equipamientos');
 
     	xhr.setRequestHeader('Content-Type', 'application/json');
-   
-    	xhr.send(JSON.stringify({
+
+    	let message = JSON.stringify({
     		idequipamiento: this.props.id,
     		idcategoria: this.state.selected_categoria.id,
     		nombre: this.state.name,
     		descripcion: this.state.description,
-    		estado: this.state.estado
-    	}))
+    		estado: parseInt(this.state.estado)
+    	});
+   
+   		console.log(message);
+    	xhr.send(message);
 	}
 
 	get_categorias(){
@@ -142,7 +145,7 @@ export class EditEquipamiento extends Component {
 				<Form.Group>
 					<Form.Label>Estado</Form.Label>
 					<Form.Control style={field} as="select" onChange={event => this.changeEstado(event.target.value)}>
-						<option value={200}>Disponible</option>
+						<option selected="selected" value={200}>Disponible</option>
 						<option value={400}>En uso</option>
 						<option value={500}>Fuera de Servicio</option>
 				    </Form.Control>
