@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import {EditEquipamiento} from './EditEquipamiento';
 
 
@@ -15,7 +16,13 @@ export class ViewEquipamiento extends Component {
 			edit_equipamiento_id: null,
 			edit_equipamiento_name: null,
 			edit_equipamiento_description: null,
-			edit_equipamiento_categoria:null
+			edit_equipamiento_categoria:null,
+			categorias_data:[{
+	    		index:0,
+	    		nombre:"Cargando categorias",
+	    		descripcion:null,
+	    		id:null
+	    	}]
 	    };
 	    this.changeEdit = React.createRef();
 	}
@@ -49,6 +56,35 @@ export class ViewEquipamiento extends Component {
     	xhr.send();
 	}
 
+	get_equipamiento_categoria(categoria_id){
+		var xhr = new XMLHttpRequest();
+		xhr.addEventListener('load', () => {
+      		console.log(xhr.responseText)
+      		var raw_data = xhr.responseText;
+      		var converted_data = JSON.parse(raw_data);
+      		console.log(converted_data);
+
+      		var proceced_data = [];
+
+      		for (var i = 0; i < converted_data.length; i++) {
+      			let data = converted_data[i];
+      			if (data.estado != 900) {
+      				proceced_data.push(data);
+      			}
+      		}
+      		console.log(proceced_data);
+
+      		this.setState({
+				equipamiento_data: proceced_data
+			});
+    	})
+    	xhr.open('GET', '/equipamientos/categoria/'+categoria_id);
+
+    	xhr.setRequestHeader('Content-Type', 'application/json');
+   
+    	xhr.send();
+	}
+
 	nuke_equipamiento(id){
 
 		//console.log(id);
@@ -67,8 +103,43 @@ export class ViewEquipamiento extends Component {
 
 	}
 
+	get_categorias(){
+		var xhr = new XMLHttpRequest();
+		xhr.addEventListener('load', () => {
+      		console.log(xhr.responseText)
+      		var raw_data = xhr.responseText;
+      		var converted_data = JSON.parse(raw_data);
+      		console.log(converted_data);
+
+      		var proceced_data = [];
+
+      		for (var i = 0; i < converted_data.length; i++) {
+      			let data = converted_data[i];
+      			if (data.estado != 90) {
+      				proceced_data.push(data);
+      			}
+      		}
+
+      		for (var i = 0; i < proceced_data.length; i++) {
+      			proceced_data[i]["index"] = i;
+      		}
+
+      		console.log(proceced_data);
+
+      		this.setState({
+				categorias_data: proceced_data
+			});
+    	})
+    	xhr.open('GET', '/categorias');
+
+    	xhr.setRequestHeader('Content-Type', 'application/json');
+   
+    	xhr.send();
+	}
+
 	componentDidMount() {
 		this.get_equipamiento();
+		this.get_categorias();
 	}
 
 	volver(){
@@ -115,11 +186,26 @@ export class ViewEquipamiento extends Component {
 		return converted_estado;
 	}
 
+	changeCategoria(index){
+
+		if (index == -1) {
+			this.get_equipamiento();
+		} else {
+			var categoria = this.state.categorias_data[index];
+
+			this.get_equipamiento_categoria(categoria.id);
+
+			this.setState({
+				selected_categoria: categoria
+			});
+		}
+	}
+
 	render() {
 		
 
-		const label = {
-			display: "block"
+		const field = {
+			backgroundColor: '#F5F5F5'
 		}
 
 		return (
@@ -133,11 +219,19 @@ export class ViewEquipamiento extends Component {
 						<Table striped bordered hover>
 							<thead>
 						    	<tr>
-							      <th>Nombre</th>
-							      <th>Categoria</th>
-							      <th>Descripcion</th>
-							      <th>Acciones</th>
-							      <th>Estado actual</th>
+							      	<th>Nombre</th>
+								    <th>
+								    	Categoria
+								    	<Form.Control style={field} as="select" onChange={event => this.changeCategoria(event.target.value)}>
+								    		<option selected="selected" value={-1}>Todas</option>
+											{this.state.categorias_data.map ((categoria) => 
+												<option value={categoria.index}>{categoria.nombre}</option>
+											)}
+				    					</Form.Control>
+								    </th>
+								    <th>Descripcion</th>
+								    <th>Acciones</th>
+								    <th>Estado actual</th>
 						    	</tr>
 						  	</thead>
 						  	<tbody>

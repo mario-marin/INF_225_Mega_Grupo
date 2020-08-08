@@ -84,8 +84,7 @@ export class AddEquipamiento extends Component {
       		console.log(proceced_data);
 
       		this.setState({
-				categorias_data: proceced_data,
-				selected_categoria: proceced_data[0]
+				categorias_data: proceced_data
 			});
     	})
     	xhr.open('GET', '/categorias');
