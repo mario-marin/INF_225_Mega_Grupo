@@ -14,7 +14,7 @@ export class MainEquipamiento extends Component {
 	    	exito_guardar: false,
 	    	hide_create: false
 	    };
-	    this.changeCategoria = React.createRef()
+	    this.addEquipamiento = React.createRef();
 	}
 
 	volver(){
@@ -30,22 +30,22 @@ export class MainEquipamiento extends Component {
 		});
 	}
 
-	guardar_categoria(){
+	guardar_equipamiento(){
 
-		this.changeCategoria.current.save();
+		this.addEquipamiento.current.save();
 
 		this.setState({
 			exito_guardar: true
 		});
 	}
 
-	hide_create_cat(){
+	hide_create_equipamiento(){
 		this.setState({
 			hide_create: true
 		});
 	}
 
-	unhide_create_cat(){
+	unhide_create_equipamiento(){
 		this.setState({
 			hide_create: false
 		});
@@ -69,8 +69,8 @@ export class MainEquipamiento extends Component {
 							
 							<div>
 								<ViewEquipamiento
-								hide_button = {this.hide_create_cat.bind(this)}
-								unhide_button = {this.unhide_create_cat.bind(this)}
+								hide_button = {this.hide_create_equipamiento.bind(this)}
+								unhide_button = {this.unhide_create_equipamiento.bind(this)}
 								/>
 							</div>
 							{
@@ -91,13 +91,13 @@ export class MainEquipamiento extends Component {
 						<div>
 							<div>
 								<AddEquipamiento
-									ref = {this.changeCategoria}
+									ref = {this.addEquipamiento}
 								/>
 							</div>
 
 							<div>
 
-								<Button variant="primary" onClick={ () => {this.guardar_categoria()}} >Guardar</Button> {' '}
+								<Button variant="primary" onClick={ () => {this.guardar_equipamiento()}} >Guardar</Button> {' '}
 								<Button variant="light" onClick={ () => {this.volver()}} >Volver</Button> 
 							</div>
 
@@ -118,7 +118,9 @@ export class MainEquipamiento extends Component {
 				{
 					this.state.selector == 2 ? (
 						<div>
-							<MainCategorias/>
+							<MainCategorias
+								volver_equipamiento = {this.volver.bind(this)}
+							/>
 						</div>
 						) : null
 				}

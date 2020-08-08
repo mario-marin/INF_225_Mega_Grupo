@@ -59,7 +59,7 @@ export class AddCategoria extends Component {
 				</Form.Group>
 				<Form.Group>
 					<Form.Label>Descripcion</Form.Label>
-					<Form.Control style={field} value={this.state.description} onChange={event => this.changeDescription(event.target.value)}/>
+					<Form.Control as="textarea" rows="10" style={field} value={this.state.description} onChange={event => this.changeDescription(event.target.value)}/>
 				</Form.Group>
 			</div>
 		);

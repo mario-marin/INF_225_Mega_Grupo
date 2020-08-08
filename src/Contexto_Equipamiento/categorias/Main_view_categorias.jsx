@@ -75,7 +75,8 @@ export class MainCategorias extends Component {
 							{
 								this.state.hide_create ? (null) : (
 									<div>
-										<Button variant="primary" onClick={ () => {this.go(1)}} >Agregar categoria</Button>
+										<Button variant="primary" onClick={ () => {this.go(1)}} >Agregar categoria</Button> {' '}
+										<Button variant="light" onClick={ () => {this.props.volver_equipamiento()}} >Volver</Button>
 									</div>
 									)
 							}

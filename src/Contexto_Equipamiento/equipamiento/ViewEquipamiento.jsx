@@ -9,17 +9,18 @@ export class ViewEquipamiento extends Component {
 	constructor(props){
 		super(props);
 	    this.state = {
-	    	data: null,
+	    	equipamiento_data: null,
 	    	selector: 0,
 			exito_guardar: false,
-			edit_categoria_id: null,
-			edit_categoria_name: null,
-			edit_categoria_description: null
+			edit_equipamiento_id: null,
+			edit_equipamiento_name: null,
+			edit_equipamiento_description: null,
+			edit_equipamiento_categoria:null
 	    };
 	    this.changeEdit = React.createRef();
 	}
 
-	get_categorias(){
+	get_equipamiento(){
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('load', () => {
       		console.log(xhr.responseText)
@@ -31,34 +32,34 @@ export class ViewEquipamiento extends Component {
 
       		for (var i = 0; i < converted_data.length; i++) {
       			let data = converted_data[i];
-      			if (data.estado != 90) {
+      			if (data.estado != 900) {
       				proceced_data.push(data);
       			}
       		}
       		console.log(proceced_data);
 
       		this.setState({
-				data: proceced_data
+				equipamiento_data: proceced_data
 			});
     	})
-    	xhr.open('GET', '/categorias');
+    	xhr.open('GET', '/equipamientos');
 
     	xhr.setRequestHeader('Content-Type', 'application/json');
    
     	xhr.send();
 	}
 
-	nuke_categoria(id){
+	nuke_equipamiento(id){
 
 		//console.log(id);
 		
 		var xhr = new XMLHttpRequest();
 
 		xhr.addEventListener('load', () => {
-			this.get_categorias();
+			this.get_equipamiento();
 		});
 
-		xhr.open('DELETE', '/categorias/'+id);
+		xhr.open('DELETE', '/equipamientos/'+id);
 
     	xhr.setRequestHeader('Content-Type', 'application/json');
    
@@ -67,14 +68,14 @@ export class ViewEquipamiento extends Component {
 	}
 
 	componentDidMount() {
-		this.get_categorias();
+		this.get_equipamiento();
 	}
 
 	volver(){
 
 		this.props.unhide_button();
 
-		this.get_categorias();
+		this.get_equipamiento();
 		this.setState({
 			selector: 0,
 			exito_guardar: false
@@ -82,12 +83,13 @@ export class ViewEquipamiento extends Component {
 
 	}
 
-	go(value,id,name, description){
+	go(value,id,name, description,categoria){
 		this.setState({
 			selector: value,
-			edit_categoria_id: id,
-			edit_categoria_name: name,
-			edit_categoria_description: description
+			edit_equipamiento_id: id,
+			edit_equipamiento_name: name,
+			edit_equipamiento_description: description,
+			edit_equipamiento_categoria: categoria
 		});
 	}
 
@@ -100,6 +102,19 @@ export class ViewEquipamiento extends Component {
 		});
 	}
 
+	convert_estado(estado){
+		var converted_estado
+		if (estado == 100 || estado ==200 || estado == 800) {
+			converted_estado = "Disponible";
+		} else if (estado == 400) {
+			converted_estado = "En uso";
+		} else if (estado == 500) {
+			converted_estado = "Fuera de Servicio";
+		}
+
+		return converted_estado;
+	}
+
 	render() {
 		
 
@@ -110,7 +125,7 @@ export class ViewEquipamiento extends Component {
 		return (
 			<div>
 			{
-				this.state.data == null ? (<div>Cargando...</div>) : (
+				this.state.equipamiento_data == null ? (<div>Cargando...</div>) : (
 				<div>
 				{
 					this.state.selector == 0 ? (
@@ -119,18 +134,22 @@ export class ViewEquipamiento extends Component {
 							<thead>
 						    	<tr>
 							      <th>Nombre</th>
+							      <th>Categoria</th>
 							      <th>Descripcion</th>
 							      <th>Acciones</th>
+							      <th>Estado actual</th>
 						    	</tr>
 						  	</thead>
 						  	<tbody>
-							{this.state.data.map ((categoria) => 
+							{this.state.equipamiento_data.map ((equipamiento) => 
 								<tr>
-									<td>{categoria.nombre}</td>
-									<td>{categoria.descripcion}</td>
+									<td>{equipamiento.name}</td>
+									<td>{equipamiento.categoria.nombre}</td>
+									<td>{equipamiento.descripsion}</td>
+									<td>{this.convert_estado(equipamiento.estado)}</td>
 									<td>
-										<Button variant="primary" onClick={ () => {this.go(1, categoria.id, categoria.nombre, categoria.descripcion)}} >Editar</Button>  {' '}
-										<Button variant="danger" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</Button>  
+										<Button variant="primary" onClick={ () => {this.go(1, equipamiento.id, equipamiento.name, equipamiento.descripsion, equipamiento.categoria)}} >Editar</Button>  {' '}
+										<Button variant="danger" onClick={ () => {this.nuke_equipamiento(equipamiento.id)}} >Eliminar</Button>  
 									</td>
 								</tr>
 							)}
@@ -143,9 +162,10 @@ export class ViewEquipamiento extends Component {
 					this.state.selector == 1 ? (
 					<div>
 						<EditEquipamiento
-							id = {this.state.edit_categoria_id} 
-							name = {this.state.edit_categoria_name}
-							description = {this.state.edit_categoria_description}
+							id = {this.state.edit_equipamiento_id} 
+							name = {this.state.edit_equipamiento_name}
+							description = {this.state.edit_equipamiento_description}
+							categoria = {this.state.edit_equipamiento_categoria}
 							hide_button = {this.props.hide_button.bind(this)}
 							ref = {this.changeEdit}
 						/>
