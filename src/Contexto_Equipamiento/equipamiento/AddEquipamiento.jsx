@@ -56,7 +56,7 @@ export class AddEquipamiento extends Component {
     		idcategoria: this.state.selected_categoria.id,
     		nombre: this.state.name,
     		descripcion: this.state.description,
-    		estado: 100
+    		estado: parseInt(this.state.estado)
     	}))
 	}
 
@@ -84,7 +84,8 @@ export class AddEquipamiento extends Component {
       		console.log(proceced_data);
 
       		this.setState({
-				categorias_data: proceced_data
+				categorias_data: proceced_data,
+				selected_categoria: proceced_data[0]
 			});
     	})
     	xhr.open('GET', '/categorias');
