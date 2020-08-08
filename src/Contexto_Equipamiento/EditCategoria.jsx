@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Form from 'react-bootstrap/Form';
 
 
 export class EditCategoria extends Component {
@@ -46,27 +47,23 @@ export class EditCategoria extends Component {
 	render() {
 		
 
-		const label = {
-			display: "block"
+		const field = {
+			width: '70vw',
+			backgroundColor: '#F5F5F5'
 		}
 
 		return (
 			<div>
 				<h1>Editar una Categoria</h1>
 
-				<form>
-					<label style={label}>
-						Nombre
-					</label>
-					<input type="text" value={this.state.name} onChange={event => this.changeName(event.target.value)} ></input>
-					<label style={label}>
-						Descripcion
-					</label>
-					<textarea type="text" value={this.state.description} onChange={event => this.changeDescription(event.target.value)} >
-					</textarea>
-					
-
-				</form>
+				<Form.Group>
+					<Form.Label>Nombre</Form.Label>
+					<Form.Control style={field} value={this.state.name} onChange={event => this.changeName(event.target.value)} />
+				</Form.Group>
+				<Form.Group>
+					<Form.Label>Descripcion</Form.Label>
+					<Form.Control as="textarea" rows="10" style={field} value={this.state.description} onChange={event => this.changeDescription(event.target.value)}/>
+				</Form.Group>
 
 			</div>
 		);

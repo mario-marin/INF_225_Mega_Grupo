@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import {EditCategoria} from './EditCategoria';
 
 
@@ -119,7 +120,7 @@ export class ViewCategorias extends Component {
 						    	<tr>
 							      <th>Nombre</th>
 							      <th>Descripcion</th>
-							      <th>Accion</th>
+							      <th>Acciones</th>
 						    	</tr>
 						  	</thead>
 						  	<tbody>
@@ -128,8 +129,8 @@ export class ViewCategorias extends Component {
 									<td>{categoria.nombre}</td>
 									<td>{categoria.descripcion}</td>
 									<td>
-										<button type="button" onClick={ () => {this.go(1, categoria.id, categoria.nombre, categoria.descripcion)}} >Editar</button>  
-										<button type="button" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</button>  
+										<Button variant="primary" onClick={ () => {this.go(1, categoria.id, categoria.nombre, categoria.descripcion)}} >Editar</Button>  {' '}
+										<Button variant="danger" onClick={ () => {this.nuke_categoria(categoria.id)}} >Eliminar</Button>  
 									</td>
 								</tr>
 							)}
@@ -148,8 +149,8 @@ export class ViewCategorias extends Component {
 							hide_button = {this.props.hide_button.bind(this)}
 							ref = {this.changeEdit}
 						/>
-						<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
-						<button type="button" onClick={ () => {this.volver()}} >Volver</button> 
+						<Button variant="primary" onClick={ () => {this.guardar_categoria()}} >Guardar</Button> {' '}
+						<Button variant="light" onClick={ () => {this.volver()}} >Volver</Button> 
 						{
 								this.state.exito_guardar ? 
 								(

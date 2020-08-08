@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {AddCategoria} from './AddCategoria';
 import {ViewCategorias} from './ViewCategorias';
+import Button from 'react-bootstrap/Button';
 
 
 export class MainEquipamiento extends Component {
@@ -74,7 +75,7 @@ export class MainEquipamiento extends Component {
 							{
 								this.state.hide_create ? (null) : (
 									<div>
-										<button type="button" onClick={ () => {this.go(1)}} >Crear categoria</button>
+										<Button variant="primary" onClick={ () => {this.go(1)}} >Agregar categoria</Button>
 									</div>
 									)
 							}
@@ -94,8 +95,8 @@ export class MainEquipamiento extends Component {
 
 							<div>
 
-								<button type="button" onClick={ () => {this.guardar_categoria()}} >Guardar</button> 
-								<button type="button" onClick={ () => {this.volver()}} >Volver</button> 
+								<Button variant="primary" onClick={ () => {this.guardar_categoria()}} >Guardar</Button> {' '}
+								<Button variant="light" onClick={ () => {this.volver()}} >Volver</Button> 
 							</div>
 
 							{
