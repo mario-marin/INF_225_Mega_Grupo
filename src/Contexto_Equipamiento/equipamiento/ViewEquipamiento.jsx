@@ -95,7 +95,7 @@ export class ViewEquipamiento extends Component {
 			this.get_equipamiento();
 		});
 
-		xhr.open('DELETE', '/equipamientos/'+id);
+		xhr.open('DELETE', '/equipamientos/delete/'+id);
 
     	xhr.setRequestHeader('Content-Type', 'application/json');
    
