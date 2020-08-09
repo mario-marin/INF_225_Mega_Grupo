@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from './pages/HomePage';
+import SalasPage from './pages/SalasPage';
+import SalasFormPage from './pages/SalasFormPage';
+
+const App = () => {
+  return(
+    <Router>
+      <Switch>
+        <Route exact path="/salas" component={SalasPage}></Route>
+        <Route exact path="/" component={HomePage}></Route>
+        <Route exact path="/salasForm" component={SalasFormPage}></Route>
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
