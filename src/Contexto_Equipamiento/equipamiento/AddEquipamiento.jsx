@@ -10,7 +10,7 @@ export class AddEquipamiento extends Component {
 	    	name: null,
 	    	description: null,
 	    	selected_categoria: null,
-	    	estado: null,
+	    	estado: "200",
 	    	categorias_data: [{
 	    		index:0,
 	    		nombre:"Cargando categorias",
