@@ -9,7 +9,7 @@ import {MainEquipamiento} from './Contexto_Equipamiento/Main_view_equipamiento';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainEquipamiento />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
