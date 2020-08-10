@@ -93,7 +93,7 @@ event.preventDefault()
        event.preventDefault();
      } 
      else{  
-       alert("hola")
+  
 
       
        solicitudService.create({

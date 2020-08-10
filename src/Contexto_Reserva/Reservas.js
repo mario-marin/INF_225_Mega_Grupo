@@ -78,7 +78,7 @@ get_equipamiento(){
   var listaequipamiento = []
     equipamientoService.getAll().then (res=>{var pac=res.data;
       for (var i in pac){
-      var obj1 = pac[i].id
+      var obj1 = pac[i].name
 
       listaequipamiento.push(obj1)
       }
