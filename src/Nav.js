@@ -18,6 +18,9 @@ function Nav() {
             <Link style={navStyle} to="/equipamiento">
                 <li>Equipamiento</li>
             </Link>
+            <Link style={navStyle} to="/sillones">
+                <li>Sillones</li>
+            </Link>
             <Link style={navStyle} to="/contexto">
                 <li>Otro contexto</li>
             </Link>
