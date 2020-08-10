@@ -230,8 +230,8 @@ export class ViewEquipamiento extends Component {
 				    					</Form.Control>
 								    </th>
 								    <th>Descripcion</th>
-								    <th>Acciones</th>
 								    <th>Estado actual</th>
+								    <th>Acciones</th>
 						    	</tr>
 						  	</thead>
 						  	<tbody>
