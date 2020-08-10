@@ -8,6 +8,7 @@ import EditPersonal from "./Contexto_Equipo/EditPersonal";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {MainEquipamiento} from './Contexto_Equipamiento/Main_view_equipamiento';
 import AddSillon from "./Contexto_Sillones/components/AddSillon";
+import Reservas from "./Contexto_Reserva/Reserva.js";
 import Sillon from "./Contexto_Sillones/components/Sillon";
 import SillonList from "./Contexto_Sillones/components/SillonList";
 // RECUERDEN HACER LOS IMPORT DE SUS COMPONENTES, DESDE SUS CARPETAS
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/sillones" component={SillonList} />
           <Route exact path="/sillones/add" component={AddSillon} />
           <Route path="/sillones/:id" component={Sillon} />
+          <Route path ="/reservas" component={Reservas} />
           {/*AQUI ABAJO PONER LAS RUTAS A SUS COMPONENTES DE LOS CONTEXTOS FALTANTES*/}
 
 
