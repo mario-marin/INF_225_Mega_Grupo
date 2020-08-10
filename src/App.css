@@ -56,3 +56,7 @@ nav{
   align-items: center;
   list-style: none;
 } 
+
+.table-sillones {
+  max-height: 400px;
+}
