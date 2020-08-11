@@ -39,15 +39,13 @@ const SalasFormPage = () => {
                     <Form>
                         <Card>
                             <CardHeader>Agregar una nueva sala.</CardHeader>
-                            
-                            <CardBody>
-                                
+                            <CardBody>                  
                                     <Container>
                                     <FormGroup>
                                         <FormLabel> Tipo de Sala </FormLabel>
                                         <FormControl as='select' name='tipoSala' size='lg' onChange = {(event) => handleChange(event)}>
                                             <option></option>
-                                            <option>Pabellón</option>
+                                            <option>Pabellon</option>
                                             <option>Descanso</option>
                                         </FormControl>
                                     </FormGroup>

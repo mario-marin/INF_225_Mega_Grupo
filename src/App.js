@@ -3,9 +3,9 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import HomePage from './pages/HomePage';
-import SalasPage from './pages/SalasPage';
-import SalasFormPage from './pages/SalasFormPage';
+import HomePage from './Contexto_Salas/pages/HomePage';
+import SalasPage from './Contexto_Salas/pages/SalasPage';
+import SalasFormPage from './Contexto_Salas/pages/SalasFormPage';
 
 const App = () => {
   return(

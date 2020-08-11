@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import  { Container, Col, Form, FormGroup, Input, Button, Card, Table, CardHeader, CardBody, CardFooter } from 'reactstrap';
+import  { Container, Col, Form, FormGroup, Input, Button, Card, Table, CardHeader, CardBody, CardFooter, ButtonDropdown } from 'reactstrap';
 import NavigationComponent from '../components/NavigationComponent';
 import salasService from '../services/salas.services';
 import { FormLabel, FormControl, FormCheck } from "react-bootstrap";
@@ -7,6 +7,7 @@ import { FormLabel, FormControl, FormCheck } from "react-bootstrap";
 const SalasPage = () => {
 
     const [salas, setSalas] = useState([]);
+    const [tipoSala, setTipoSala] = useState('')
     useEffect(() => {
         salasService.getSalas().then(res =>{
             setSalas(res.data);
@@ -34,8 +35,20 @@ const handleChange = (event) =>{
             console.log(error);
         });
     } else if (keyname === "tipoSala"){
-        setDisponibilidad(event.target.value)
+            salasService.getSalasByTipo(keyname).then(res =>{
+                setSalas(res.data);
+            }).catch(error =>{
+                console.log(error);
+            }
+        )
     }
+}
+const handleSubmit = (event)=>{
+    event.preventDefault();
+    salasService.getSalasByTipo(tipoSala).then(response =>{
+        console.log(response);
+    });
+
 }
 
     return(
@@ -52,17 +65,18 @@ const handleChange = (event) =>{
                             <Form>
                                 <FormLabel>Por id</FormLabel>
                                 <FormControl type="text" name="id"  onChange ={(event) => handleChange(event)}/>
+                                <br></br>
                                 <FormControl as='select' name='tipoSala' size='lg' onChange = {(event) => handleChange(event)}>
                                             <option></option>
-                                            <option>Pabellón</option>
+                                            <option>Pabellon</option>
                                             <option>Descanso</option>
                                 </FormControl>
+                                <Button type= "submit" color="primary" onClick ={(event) => handleSubmit(event)}>Submit</Button>
                             </Form>
                         </CardBody>
                     </Card>
                     <br/>
-                </Container>
-                <Col>
+                    <Col>
                     <Table>
                         <thead> 
                             <tr>
@@ -77,6 +91,7 @@ const handleChange = (event) =>{
                         </tbody>
                     </Table>
                 </Col>
+                </Container>
         </div>
     )
 }

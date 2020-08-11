@@ -8,9 +8,6 @@ import  { Container, Row, Col } from 'reactstrap';
 
 
 
-
-
-
 const HomePage = () => {
     return(
         <div>
