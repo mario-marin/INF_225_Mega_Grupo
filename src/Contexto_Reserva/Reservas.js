@@ -67,8 +67,7 @@ get_equipo(){
   var listaequipo = []
     equipoService.getAll().then (res=>{var pac=res.data;
       for (var i in pac){
-      var obj1 = pac[i].id
-
+      var obj1 = pac[i].nombre
       listaequipo.push(obj1)
       }
       this.setState({equipos:listaequipo})
@@ -78,12 +77,15 @@ get_equipamiento(){
   var listaequipamiento = []
     equipamientoService.getAll().then (res=>{var pac=res.data;
       for (var i in pac){
+      var obj = pac[i]
+      if (parseInt(obj.estado) === 200){
       var obj1 = pac[i].name
 
       listaequipamiento.push(obj1)
       }
       this.setState({equipamientos:listaequipamiento})
-})
+    }
+    })
 }
 
 
@@ -148,9 +150,8 @@ get_equipamiento(){
 
 
 
-  
-  render(){
 
+  render(){
 
     if (this.state.carga === "" || this.state.pacientes === "" ||  this.state.sillones === "" 
     || this.state.solicitudes===  ""|| this.state.equipos===  ""|| this.state.equipamientos===  ""
