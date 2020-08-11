@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import  { Container, Col, Form, FormGroup, Input, Button, Card, Table, CardHeader, CardBody, CardFooter, ButtonDropdown } from 'reactstrap';
+import  { Container, Col, Row, Form, FormGroup, Input, Button, Card, Table, CardHeader, CardBody, CardFooter, ButtonDropdown } from 'reactstrap';
 import NavigationComponent from '../components/NavigationComponent';
 import salasService from '../services/salas.services';
 import { FormLabel, FormControl, FormCheck } from "react-bootstrap";
@@ -58,39 +58,46 @@ const handleSubmit = (event)=>{
                 crossOrigin="anonymous"></link>
             <NavigationComponent></NavigationComponent>
                 <Container>
+                    <Row>
                     <br></br>
-                    <Card>
-                        <CardHeader>Buscar Sala</CardHeader>
-                        <CardBody>
-                            <Form>
-                                <FormLabel>Por id</FormLabel>
-                                <FormControl type="text" name="id"  onChange ={(event) => handleChange(event)}/>
-                                <br></br>
-                                <FormControl as='select' name='tipoSala' size='lg' onChange = {(event) => handleChange(event)}>
-                                            <option></option>
-                                            <option>Pabellon</option>
-                                            <option>Descanso</option>
-                                </FormControl>
-                                <Button type= "submit" color="primary" onClick ={(event) => handleSubmit(event)}>Submit</Button>
-                            </Form>
-                        </CardBody>
-                    </Card>
                     <br/>
-                    <Col>
-                    <Table>
-                        <thead> 
-                            <tr>
-                                <th> Id </th>
-                                <th> Tipo de sala </th>
-                                <th> Equipamiento</th>
-                                <th> Disponibilidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {salasItems}
-                        </tbody>
-                    </Table>
-                </Col>
+                        <Col sm={9}>
+                            <Col>
+                                <Table>
+                                    <thead> 
+                                        <tr>
+                                            <th> Id </th>
+                                            <th> Tipo de sala </th>
+                                            <th> Equipamiento</th>
+                                            <th> Disponibilidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {salasItems}
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <CardHeader>Buscar Sala</CardHeader>
+                                <CardBody>
+                                    <Form>
+                                        <FormLabel>Por id</FormLabel>
+                                        <FormControl type="text" name="id"  onChange ={(event) => handleChange(event)}/>
+                                        <br></br>
+                                        <FormControl as='select' name='tipoSala' size='lg' onChange = {(event) => handleChange(event)}>
+                                                    <option></option>
+                                                    <option>Pabellon</option>
+                                                    <option>Descanso</option>
+                                        </FormControl>
+                                        <br/>
+                                        <Button type= "submit" color="primary" onClick ={(event) => handleSubmit(event)}>Submit</Button>
+                                    </Form>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Container>
         </div>
     )
