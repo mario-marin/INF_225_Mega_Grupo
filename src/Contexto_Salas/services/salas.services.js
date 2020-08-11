@@ -18,9 +18,9 @@ const addSalas = (tipo,equipamiento,disponibilidad) => {
 }
 const getSalasById =(id)=>{
     let url = `${API_URL}/${id}`;
-    
     return axios.get(url);
 }
+
 const getSalasbyTipo =(tipo)=>{
   let url = `${API_URL}/tipo?tipoSala=${tipo}`;
   return axios.get(url);
@@ -30,7 +30,8 @@ const getSalasbyTipo =(tipo)=>{
 const salasService = {
     getSalas,
     addSalas,
-    getSalasById
+    getSalasById,
+    getSalasbyTipo
     
 };
 

@@ -1,14 +1,33 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import  { Container, Col, Form, FormGroup, Input, Button, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 import salasService from '../services/salas.services';
 import NavigationComponent from "../components/NavigationComponent";
 import { FormLabel, FormControl, FormCheck } from "react-bootstrap";
+import equipamientoService from "../services/equipamiento.service"
+import Select from "../components/select"
 
 const SalasFormPage = () => {
 
-    const [tipoSala, setTipoSala] = useState('')
-    const [equipamiento, setEquipamento] = useState('');
-    const [disponibilidad, setDisponibilidad] = useState('');
+    const [tipoSala, setTipoSala] = useState([])
+    const [equipamiento, setEquipamento] = useState([]);
+    const [disponibilidad, setDisponibilidad] = useState([]);
+    const [equipamientoDisp, setEquipamentoDisp] = useState([]);
+    
+    useEffect(() => {
+        equipamientoService.getAll().then(res =>{
+            var lista = []
+            for ( var i in res.data){
+                if (parseInt(res.data[i].estado) === 200){
+                    lista.push(res.data[i])
+                }
+            }
+             
+            setEquipamentoDisp(lista);
+        }).catch(error => {
+            console.log(error);
+        });
+    }, []);
+
 
     const handleChange = (event) =>{
         const keyname = event.target.name;
@@ -16,17 +35,18 @@ const SalasFormPage = () => {
             setTipoSala(event.target.value);
         } else if (keyname === "equipamiento") {
             setEquipamento(event.target.value);
-        } else if (keyname === "disponibilidad"){
-            setDisponibilidad(event.target.value)
         }
+        setDisponibilidad(true)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(tipoSala,equipamiento,disponibilidad)
         salasService.addSalas(tipoSala,equipamiento,disponibilidad).then(response => {
             console.log(response);
         });
     }
+
 
     return(
         <React.Fragment >
@@ -51,15 +71,7 @@ const SalasFormPage = () => {
                                     </FormGroup>
                                     <FormGroup>
                                         <FormLabel>Equipo de la Sala</FormLabel>
-                                        <FormControl as='textarea' rows='4' name='equipamiento' onChange = {(event) => handleChange(event)}></FormControl>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <FormLabel> Disponible </FormLabel>
-                                        <FormControl as='select' size='lg' name='disponibilidad' onChange = {(event) => handleChange(event)}>
-                                            <option></option>
-                                            <option>True</option>
-                                            <option>False</option>
-                                        </FormControl>
+                                        <Select name="equipamiento" placeholder='Elija el equipamiento' ItemList = {equipamientoDisp} onChange={(event) => handleChange(event)}></Select> 
                                     </FormGroup>
                                     </Container>
                                     <br />
